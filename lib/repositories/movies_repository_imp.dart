@@ -1,6 +1,6 @@
 import 'package:movieapp/models/movies_model.dart';
 import 'package:movieapp/repositories/movies_repository.dart';
-import 'package:movieapp/service/dio_service.dart';
+import 'package:movieapp/services/dio_service.dart';
 import 'package:movieapp/utils/api_utils.dart';
 
 class MovieRepositoryImp implements MoviesRepository {
