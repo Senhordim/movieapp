@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:movieapp/controllers/movies_controller.dart';
 import 'package:movieapp/models/movies_model.dart';
 import 'package:movieapp/pages/widgets/item_custom_card.dart';
@@ -39,17 +40,14 @@ class _HomePageState extends State<HomePage> {
                 valueListenable: _controller.movies,
                 builder: (_, movies, __) {
                   return movies != null
-                      ? ListView.separated(
+                      ? ListView.builder(
                           physics: const NeverScrollableScrollPhysics(),
                           shrinkWrap: true,
                           itemCount: movies.movie!.length,
                           itemBuilder: (context, index) =>
                               ItemCustomCard(movie: movies.movie![index]),
-                          separatorBuilder: (BuildContext context, int index) {
-                            return const Divider();
-                          },
                         )
-                      : Container();
+                      : Center(child: Lottie.asset('assets/json/lottie.json'));
                 }),
           ],
         ),
