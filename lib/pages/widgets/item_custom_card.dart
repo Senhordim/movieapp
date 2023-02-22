@@ -62,13 +62,13 @@ class ItemCustomCard extends StatelessWidget {
                         height: 10,
                       ),
                       Text(
-                        'Votos: ' + movie.voteAverage!.toString(),
+                        "Votos: ${movie.voteAverage!}",
                         style: Theme.of(context).textTheme.titleSmall,
                         softWrap: true,
                       ),
                       const Spacer(),
                       Text(
-                        'Popularidade: ' + movie.popularity!.toString(),
+                        "Popularidade: ${movie.popularity!}",
                         style: Theme.of(context).textTheme.titleSmall,
                         softWrap: true,
                       ),

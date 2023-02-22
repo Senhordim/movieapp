@@ -22,10 +22,10 @@ class MoviesController {
   }
 
   searchMovies(String query) async {
-    List<Movie> list = _cachedMovies!.listMovies!
+    List<Movie> resultList = _cachedMovies!.listMovies!
         .where((e) => e.toString().toLowerCase().contains(query.toLowerCase()))
         .toList();
 
-    movies.value = MoviesModel(listMovies: list);
+    movies.value = MoviesModel(listMovies: resultList);
   }
 }

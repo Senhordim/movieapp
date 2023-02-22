@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:movieapp/controllers/movies_controller.dart';
+import 'package:movieapp/decorators/movies_cache_repository_decorator.dart';
 import 'package:movieapp/models/movies_model.dart';
 import 'package:movieapp/pages/widgets/item_custom_card.dart';
 import 'package:movieapp/repositories/movies_repository_imp.dart';
-import 'package:movieapp/services/dio_service_imp.dart';
+import 'package:movieapp/services/dio/dio_service_imp.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -15,8 +16,10 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final MoviesController _controller = MoviesController(
-    MovieRepositoryImp(
-      DioServiceImp(),
+    MoviesCacheRepositoryDecorator(
+      MovieRepositoryImp(
+        DioServiceImp(),
+      ),
     ),
   );
 
