@@ -36,6 +36,9 @@ class _HomePageState extends State<HomePage> {
               'Movies',
               style: Theme.of(context).textTheme.headlineMedium,
             ),
+            TextField(
+              onChanged: _controller.searchMovies,
+            ),
             ValueListenableBuilder<MoviesModel?>(
                 valueListenable: _controller.movies,
                 builder: (_, movies, __) {
@@ -43,9 +46,9 @@ class _HomePageState extends State<HomePage> {
                       ? ListView.builder(
                           physics: const NeverScrollableScrollPhysics(),
                           shrinkWrap: true,
-                          itemCount: movies.movie!.length,
+                          itemCount: movies.listMovies!.length,
                           itemBuilder: (context, index) =>
-                              ItemCustomCard(movie: movies.movie![index]),
+                              ItemCustomCard(movie: movies.listMovies![index]),
                         )
                       : Center(child: Lottie.asset('assets/json/lottie.json'));
                 }),

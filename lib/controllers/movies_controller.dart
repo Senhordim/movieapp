@@ -8,6 +8,7 @@ class MoviesController {
   ValueNotifier<bool> inLoading = ValueNotifier(false);
 
   ValueNotifier<MoviesModel?> movies = ValueNotifier<MoviesModel?>(null);
+  MoviesModel? _cachedMovies;
 
   MoviesController(this._moviesRepository) {
     getMovies();
@@ -16,6 +17,15 @@ class MoviesController {
   Future<void> getMovies() async {
     inLoading.value = true;
     movies.value = await _moviesRepository.getMovies();
+    _cachedMovies = movies.value;
     inLoading.value = false;
+  }
+
+  searchMovies(String query) async {
+    List<Movie> list = _cachedMovies!.listMovies!
+        .where((e) => e.toString().toLowerCase().contains(query.toLowerCase()))
+        .toList();
+
+    movies.value = MoviesModel(listMovies: list);
   }
 }
