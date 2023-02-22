@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:movieapp/controllers/movies_controller.dart';
 import 'package:movieapp/models/movies_model.dart';
+import 'package:movieapp/pages/widgets/item_custom_card.dart';
 import 'package:movieapp/repositories/movies_repository_imp.dart';
-import 'package:movieapp/service/dio_service_imp.dart';
+import 'package:movieapp/services/dio_service_imp.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -21,19 +22,38 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text('Movie App'),
+        body: Padding(
+      padding: const EdgeInsets.all(20),
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const SizedBox(
+              height: 40,
+            ),
+            Text(
+              'Movies',
+              style: Theme.of(context).textTheme.headlineMedium,
+            ),
+            ValueListenableBuilder<MoviesModel?>(
+                valueListenable: _controller.movies,
+                builder: (_, movies, __) {
+                  return movies != null
+                      ? ListView.separated(
+                          physics: const NeverScrollableScrollPhysics(),
+                          shrinkWrap: true,
+                          itemCount: movies.movie!.length,
+                          itemBuilder: (context, index) =>
+                              ItemCustomCard(movie: movies.movie![index]),
+                          separatorBuilder: (BuildContext context, int index) {
+                            return const Divider();
+                          },
+                        )
+                      : Container();
+                }),
+          ],
         ),
-        body: ValueListenableBuilder<MoviesModel?>(
-            valueListenable: _controller.movies,
-            builder: (_, movies, __) {
-              return movies != null
-                  ? ListView.builder(
-                      itemCount: movies.results!.length,
-                      itemBuilder: (context, index) => Text(
-                            movies.results![index].title!,
-                          ))
-                  : Container();
-            }));
+      ),
+    ));
   }
 }

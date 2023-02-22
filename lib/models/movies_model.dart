@@ -11,7 +11,7 @@ class MoviesModel {
   int? page;
   String? posterPath;
   bool? public;
-  List<Results>? results;
+  List<Movie>? movie;
   int? revenue;
   int? runtime;
   String? sortBy;
@@ -31,7 +31,7 @@ class MoviesModel {
       this.page,
       this.posterPath,
       this.public,
-      this.results,
+      this.movie,
       this.revenue,
       this.runtime,
       this.sortBy,
@@ -57,9 +57,9 @@ class MoviesModel {
     posterPath = json['poster_path'];
     public = json['public'];
     if (json['results'] != null) {
-      results = <Results>[];
+      movie = <Movie>[];
       json['results'].forEach((v) {
-        results!.add(Results.fromJson(v));
+        movie!.add(Movie.fromJson(v));
       });
     }
     revenue = json['revenue'];
@@ -87,8 +87,8 @@ class MoviesModel {
     data['page'] = page;
     data['poster_path'] = posterPath;
     data['public'] = public;
-    if (results != null) {
-      data['results'] = results!.map((v) => v.toJson()).toList();
+    if (movie != null) {
+      data['results'] = movie!.map((v) => v.toJson()).toList();
     }
     data['revenue'] = revenue;
     data['runtime'] = runtime;
@@ -373,7 +373,7 @@ class ObjectIds {
   }
 }
 
-class Results {
+class Movie {
   bool? adult;
   String? backdropPath;
   List<int>? genreIds;
@@ -390,7 +390,7 @@ class Results {
   double? voteAverage;
   int? voteCount;
 
-  Results(
+  Movie(
       {this.adult,
       this.backdropPath,
       this.genreIds,
@@ -407,7 +407,7 @@ class Results {
       this.voteAverage,
       this.voteCount});
 
-  Results.fromJson(Map<String, dynamic> json) {
+  Movie.fromJson(Map<String, dynamic> json) {
     adult = json['adult'];
     backdropPath = json['backdrop_path'];
     genreIds = json['genre_ids'].cast<int>();

@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:movieapp/service/dio_service.dart';
+import 'package:movieapp/services/dio_service.dart';
 
 class DioServiceImp implements DioService {
   @override
