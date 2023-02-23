@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:movieapp/models/movies_model.dart';
@@ -38,8 +39,9 @@ class ItemCustomCard extends StatelessWidget {
                 ),
                 child: Hero(
                   tag: movie.id!,
-                  child: Image.network(
-                    API.requestIMG(movie.posterPath!),
+                  child: Image(
+                    image: CachedNetworkImageProvider(
+                        API.requestIMG(movie.posterPath!)),
                     loadingBuilder: (_, child, progress) {
                       if (progress == null) return child;
                       return Lottie.asset('assets/json/image.json');
